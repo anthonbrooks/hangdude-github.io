@@ -16,15 +16,16 @@ for (var i = 0, l = word.length; i < l; i++) {
 }
 
 var remainingLetters = word.length;
+var timesGuessed = 0;
 
 // main game loop
-while (remainingLetters > 0) {
+while (remainingLetters > 0 && timesGuessed < remainingLetters) {
     // show player progress
     alert(answerArray.join(" "));
 
     // get guess letter from the player
     var guess = prompt("Guess a letter, or click Cancel to stop playing.");
-
+    
     if (guess === null) {
 	// exit the game loop (end game)
 	break;
@@ -33,9 +34,10 @@ while (remainingLetters > 0) {
     } else {
 	// update the game state with the guess
 	for (var j = 0, m = word.length; j < m; j++) {
-	    if (word[j] === guess) {
+	    if (word[j] === guess && answerArray[j] === "_") {
 		answerArray[j] = guess;
 		remainingLetters--;
+		timesGuessed++;
 	    }
 	}
     }
